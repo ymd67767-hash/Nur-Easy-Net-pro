@@ -161,7 +161,22 @@ onAuthStateChanged(auth,async user=>{
  $("splash").style.display="none";currentUser=user;
  if(!user){$("authPage").classList.remove("hidden");$("mainApp").classList.add("hidden");$("customerNav").classList.add("hidden");$("adminNav").classList.add("hidden");return}
  showLoading(true);
+ try{onAuthStateChanged(auth,async user=>{
+ $("splash").style.display="none";currentUser=user;
+ if(!user){$("authPage").classList.remove("hidden");$("mainApp").classList.add("hidden");$("customerNav").classList.add("hidden");$("adminNav").classList.add("hidden");return}
+ showLoading(true);
  try{
+  // 👇👇👇 এখানে এই কোডটি পেস্ট করুন 👇👇👇
+  if(user.email && user.email.toLowerCase() ===( "nurislam32@gmail.com") { // আপনার আসল ইমেইল বসান
+    isAdmin = true;
+    currentData = { name: "Admin", role: "admin" };
+    enterAdmin();
+    return;
+  }
+  // 👆👆👆 এখান পর্যন্ত 👆👆👆
+
+  const ad=await getDoc(doc(db,"admins",user.uid));
+ 
   const ad=await getDoc(doc(db,"admins",user.uid));
   if(ad.exists()&&ad.data().role==="admin"){isAdmin=true;currentData=ad.data();enterAdmin();return}
   isAdmin=false;const cd=await getDoc(doc(db,"customers",user.uid));
